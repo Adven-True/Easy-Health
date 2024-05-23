@@ -2,10 +2,7 @@ package com.atguigu.yygh.common.result;
 
 import lombok.Getter;
 
-/**
- * Unified Return Result Status Information Class
- * @author Administrator
- */
+
 @Getter
 public enum ResultCodeEnum {
 

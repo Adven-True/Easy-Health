@@ -4,10 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-/**
- * Global unified return result class
- * @author Administrator
- */
+
 @Data
 @ApiModel(value = "Global Unified Return Result")
 public class Result<T> {

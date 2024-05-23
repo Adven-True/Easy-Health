@@ -5,11 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-/**
- * Custom Global Exception Class
- *
- * @author xy
- */
+
 @Data
 @ApiModel(value = "Custom Global Exception Class")
 public class YyghException extends RuntimeException {

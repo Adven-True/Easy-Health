@@ -50,7 +50,7 @@ public class Swagger2Config {
                 .title("Website API documentation")
                 .description("This document describes the website microservice interface definitions")
                 .version("1.0")
-                .contact(new Contact("matin", "www.baidu.com", "matin0211@163.com"))
+                .contact(new Contact("", "www.baidu.com", ""))
                 .build();
     }
 
@@ -60,7 +60,7 @@ public class Swagger2Config {
                 .title("Backend Management System API Documentation")
                 .description("This document describes the backend management system microservice interface definitions")
                 .version("1.0")
-                .contact(new Contact("matin", "www.baidu.com", "matin0211@163.com"))
+                .contact(new Contact("", "www.baidu.com", ""))
                 .build();
     }
 
