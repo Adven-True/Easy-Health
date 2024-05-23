@@ -9,14 +9,7 @@ import lombok.Data;
 
 import java.util.List;
 
-/**
- * <p>
- * 权限
- * </p>
- *
- * @author qy
- * @since 2019-11-08
- */
+
 @Data
 @ApiModel(description = "Permission")
 @TableName("acl_permission")

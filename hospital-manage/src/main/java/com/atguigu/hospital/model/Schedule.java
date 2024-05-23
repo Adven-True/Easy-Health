@@ -9,13 +9,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.Date;
 
-/**
- * <p>
- * Schedule
- * </p>
- *
- * @author qy
- */
+
 @Data
 @ApiModel(description = "Schedule")
 @TableName("schedule")

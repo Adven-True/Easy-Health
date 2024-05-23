@@ -7,14 +7,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-/**
- * <p>
- * 首页Banner实体
- * </p>
- *
- * @author qy
- * @since 2019-11-08
- */
+
 @Data
 @ApiModel(description = "homepage Banner entity")
 @TableName("banner")

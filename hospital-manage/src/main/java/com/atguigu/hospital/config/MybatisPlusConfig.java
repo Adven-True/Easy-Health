@@ -10,11 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-/**
- * MybatisPlus配置类
- *
- * @author qy
- */
+
 @EnableTransactionManagement
 @Configuration
 @MapperScan("com.atguigu.hospital.mapper")

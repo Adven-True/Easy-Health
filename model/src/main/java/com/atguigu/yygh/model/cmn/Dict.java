@@ -12,13 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * <p>
- * Dict
- * </p>
- *
- * @author qy
- */
+
 @Data
 @ApiModel(description = "data dictionary")
 @TableName("dict")
