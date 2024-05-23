@@ -15,15 +15,14 @@ import javax.annotation.Resource;
  */
 
 @Component
-@EnableScheduling  //开启定时任务操作
+@EnableScheduling  //Enable scheduled task operations
 public class ScheduledTask {
     @Autowired
     private RabbitService rabbitService;
 
-    //每天8点执行 提醒就诊
-    //cron表达式，设置执行的时间  网上搜cron表达式在线生成即可
-    //@Scheduled(cron = "0 0 1 * * ?")  表示每天8点发送
-    @Scheduled(cron = "0/30 * * * * ?")  //表示每隔30s发送，为测试方便
+
+    //@Scheduled(cron = "0 0 1 * * ?")  at 8:00 am every day
+    @Scheduled(cron = "0/30 * * * * ?")  //every 30 s
     public void taskPatient() {
         rabbitService.sendMessage(MqConst.EXCHANGE_DIRECT_TASK, MqConst.ROUTING_TASK_8, "");
     }

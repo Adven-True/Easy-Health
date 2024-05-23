@@ -4,9 +4,9 @@ import com.atguigu.yygh.vo.msm.MsmVo;
 import org.springframework.stereotype.Service;
 
 public interface MsmService {
-    //发送邮箱验证码
+    //send verification code
     boolean send(String mail, String code);
 
-    //利用消息队列发送
+    //use message queue
     boolean send(MsmVo msmVo);
 }

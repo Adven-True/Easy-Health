@@ -3,7 +3,7 @@ package com.atguigu.yygh.enums;
 public enum PaymentStatusEnum {
     UNPAID(1,"Payment Pending"),
     PAID(2,"Paid");
-    //REFUND(-1,"已退款");
+    //REFUND(-1,"refunded");
 
     private Integer status ;
 

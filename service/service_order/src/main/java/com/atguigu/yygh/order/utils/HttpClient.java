@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * http请求客户端
+ * http request
  */
 public class HttpClient {
     private String url;
@@ -40,7 +40,7 @@ public class HttpClient {
     private String xmlParam;
     private boolean isHttps;
     private boolean isCert = false;
-    //证书密码 微信商户号（mch_id）
+
     private String certPassword;
 
     public boolean isHttps() {
@@ -158,7 +158,7 @@ public class HttpClient {
                 } else {
                     SSLContext sslContext = new SSLContextBuilder()
                             .loadTrustMaterial(null, new TrustStrategy() {
-                                // 信任所有
+                                 //trust all
                                 public boolean isTrusted(X509Certificate[] chain,
                                                          String authType)
                                         throws CertificateException {
@@ -179,7 +179,7 @@ public class HttpClient {
                     if (response.getStatusLine() != null)
                         statusCode = response.getStatusLine().getStatusCode();
                     HttpEntity entity = response.getEntity();
-                    // 响应内容
+
                     content = EntityUtils.toString(entity, Consts.UTF_8);
                 }
             } finally {

@@ -18,11 +18,11 @@ public class DictListener extends AnalysisEventListener<DictEeVo> {
 		this.dictMapper = dictMapper;
 	}
 
-	//一行一行地读取，从第二行开始
+	//from 2nd row, one by one
 
 	@Override
 	public void invoke(DictEeVo dictEeVo, AnalysisContext analysisContext) {
-		//调用方法添加到数据库
+		//add to database
 		Dict dict = new Dict();
 		BeanUtils.copyProperties(dictEeVo,dict);
 		dictMapper.insert(dict);

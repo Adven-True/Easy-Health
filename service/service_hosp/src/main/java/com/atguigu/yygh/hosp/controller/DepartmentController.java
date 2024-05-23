@@ -16,8 +16,8 @@ public class DepartmentController {
 	@Autowired
 	private DepartmentService departmentService;
 
-	//根据医院编号查询医院所有科室列表
-	@ApiOperation(value = "查询医院所有科室列表")
+	//
+	@ApiOperation(value = "findDepartmentList")
 	@GetMapping("getDeptList/{hoscode}")
 	public Result getDeptList(@PathVariable("hoscode") String hoscode){
 		List<DepartmentVo> list = departmentService.findDeptTree(hoscode);

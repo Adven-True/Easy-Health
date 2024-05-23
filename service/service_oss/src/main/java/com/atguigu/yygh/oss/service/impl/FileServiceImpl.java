@@ -18,20 +18,17 @@ import java.util.UUID;
 public class FileServiceImpl implements FileService {
 
 
-	//上传文件到阿里云oss
+
 	@Override
 	public String upload(MultipartFile file) {
-		// yourEndpoint填写Bucket所在地域对应的Endpoint。以华东1（杭州）为例，Endpoint填写为https://oss-cn-hangzhou.aliyuncs.com。
 		String endpoint = ConstantOssPropertiesUtils.EDNPOINT;
-		// 阿里云账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM用户进行API访问或日常运维，请登录RAM控制台创建RAM用户。
 		String accessKeyId = ConstantOssPropertiesUtils.ACCESS_KEY_ID;
 		String accessKeySecret = ConstantOssPropertiesUtils.SECRECT;
-		// 填写Bucket名称，例如examplebucket。
 		String bucketName = ConstantOssPropertiesUtils.BUCKET;
 
-		// 创建OSSClient实例。
+
 		OSS ossClient = null;
-		// 创建存储空间。
+
 		try {
 			ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
 			InputStream inputStream = file.getInputStream();
@@ -43,7 +40,7 @@ public class FileServiceImpl implements FileService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}finally {
-			// 关闭OSSClient。
+
 			ossClient.shutdown();
 		}
 		return null;

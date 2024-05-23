@@ -25,7 +25,7 @@ public class RefundInfoServiceImpl extends ServiceImpl<RefundInfoMapper, RefundI
         queryWrapper.eq("payment_type", paymentInfo.getPaymentType());
         RefundInfo refundInfo = refundInfoMapper.selectOne(queryWrapper);
         if(null != refundInfo) return refundInfo;
-        // 保存交易记录
+        // save record
         refundInfo = new RefundInfo();
         refundInfo.setCreateTime(new Date());
         refundInfo.setOrderId(paymentInfo.getOrderId());

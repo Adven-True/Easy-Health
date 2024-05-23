@@ -34,7 +34,7 @@ public class HospitalReceiver {
 	public void receiver(OrderMqVo orderMqVo, Message message, Channel channel) throws IOException {
 		if(null != orderMqVo.getAvailableNumber()) {
 			try {
-				//下单成功更新预约数
+				//update appointment number
 				Schedule schedule = scheduleService.getById(orderMqVo.getScheduleId());
 				schedule.setReservedNumber(orderMqVo.getReservedNumber());
 				schedule.setAvailableNumber(orderMqVo.getAvailableNumber());
@@ -44,7 +44,7 @@ public class HospitalReceiver {
 			}
 		}else{
 			try {
-				//取消预约更新预约数
+				//cancel appointment and update
 				Schedule schedule = scheduleService.getScheduleByHosScheduleId(orderMqVo.getScheduleId());
 				int availableNumber = schedule.getAvailableNumber().intValue() + 1;
 				schedule.setAvailableNumber(availableNumber);
@@ -54,7 +54,7 @@ public class HospitalReceiver {
 			}
 		}
 
-		//发送短信
+		//send message
 		MsmVo msmVo = orderMqVo.getMsmVo();
 		if(null != msmVo) {
 			rabbitService.sendMessage(MqConst.EXCHANGE_DIRECT_MSM, MqConst.ROUTING_MSM_ITEM, msmVo);

@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public class BigDecimalUtil {
 
-    //默认运算精度
+    //Default operation precision
     private static final int DEFAULT_DIV_SCALE = 10;
 
     /**

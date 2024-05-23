@@ -12,7 +12,7 @@
     <artifactId>service-task</artifactId>
 
     <dependencies>
-        <!--rabbitmq消息队列-->
+        <!--rabbitmq message queue-->
         <dependency>
             <groupId>com.matin</groupId>
             <artifactId>rabbit-util</artifactId>

@@ -16,7 +16,7 @@ public class FileApiController {
 	@Autowired
 	private FileService fileService;
 
-	//上传文件到阿里云oss
+	//upload to cloud server
 	@PostMapping("fileUpload")
 	public Result fileUpload(MultipartFile file){
 		String url = fileService.upload(file);

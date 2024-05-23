@@ -1,72 +1,72 @@
 [
   {
     "hoscode": "1",
-    "hosname": "北京协和医院",
+    "hosname": "Beijing",
     "picture": "https://img.114yygh.com/image/image-003/23176337663806575.png",
-    "hostype": "三级甲等",
+    "hostype": "A level",
     "releaseTime": "08:30"
   },
   {
     "hoscode": "162",
-    "hosname": "中国人民解放军总医院(301医院)",
+    "hosname": "301",
     "picture": "https://img.114yygh.com/image/image-003/23177271556061774.png",
-    "hostype": "三级甲等",
+    "hostype": "A level",
     "releaseTime": "08:30"
   },
   {
     "hoscode": "12",
-    "hosname": "北京大学第一医院",
+    "hosname": "First",
     "picture": "https://img.114yygh.com/image/image-003/23176618472499403.png",
-    "hostype": "三级甲等",
+    "hostype": "A level",
     "releaseTime": "16:00"
   },
   {
     "hoscode": "120",
-    "hosname": "北京大学人民医院",
+    "hosname": "People",
     "picture": "https://img.114yygh.com/image/image-003/23177084467557645.png",
-    "hostype": "三级甲等",
+    "hostype": "A level",
     "releaseTime": "00:00"
   },
   {
     "hoscode": "142",
-    "hosname": "北京大学第三医院",
+    "hosname": "Third",
     "picture": "https://img.114yygh.com/image/image-003/23176368020632682.png",
-    "hostype": "三级甲等",
+    "hostype": "A level",
     "releaseTime": "07:00"
   },
   {
     "hoscode": "3",
-    "hosname": "中国医学科学院肿瘤医院",
+    "hosname": "Tumor hosp",
     "picture": "https://img.114yygh.com/image/image-003/23176410054422867.png",
-    "hostype": "三级甲等",
+    "hostype": "A level",
     "releaseTime": "09:00"
   },
   {
     "hoscode": "4",
-    "hosname": "中国医学科学院阜外医院",
+    "hosname": "Science",
     "picture": "https://img.114yygh.com/image/image-003/23176448081185568.png",
-    "hostype": "三级甲等",
+    "hostype": "A level",
     "releaseTime": "09:00"
   },
   {
     "hoscode": "HFG001202",
-    "hosname": "北京市海淀区同步中医骨科医院",
+    "hosname": "Bone",
     "picture": "https://img.114yygh.com/image/image-004/26016757589138643.png",
-    "hostype": "二级专科医院",
+    "hostype": "B level",
     "releaseTime": "10:00"
   },
   {
     "hoscode": "H05110040",
-    "hosname": "民航总医院",
+    "hosname": "Airplane",
     "picture": "https://img.114yygh.com/image/image-003/23176875181268638.png",
-    "hostype": "三级综合医院",
+    "hostype": "A level",
     "releaseTime": "00:00"
   },
   {
     "hoscode": "H13151001",
-    "hosname": "北京中医医院顺义医院",
+    "hosname": "Shunyi",
     "picture": "https://img.114yygh.com/image/image-003/23176924103321432.png",
-    "hostype": "三级甲等中医医院",
+    "hostype": "A level",
     "releaseTime": "10:00"
   },
   {

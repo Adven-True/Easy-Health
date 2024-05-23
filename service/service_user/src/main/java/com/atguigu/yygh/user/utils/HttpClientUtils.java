@@ -77,20 +77,7 @@ public class HttpClientUtils {
         return get(url, charset, connTimeout, readTimeout);
     }
 
-    /**
-     * 发送一个 Post 请求, 使用指定的字符集编码.
-     *
-     * @param url
-     * @param body RequestBody
-     * @param mimeType 例如 application/xml "application/x-www-form-urlencoded" a=1&b=2&c=3
-     * @param charset 编码
-     * @param connTimeout 建立链接超时时间,毫秒.
-     * @param readTimeout 响应超时时间,毫秒.
-     * @return ResponseBody, 使用指定的字符集编码.
-     * @throws ConnectTimeoutException 建立链接超时异常
-     * @throws SocketTimeoutException  响应超时
-     * @throws Exception
-     */
+
     public static String post(String url, String body, String mimeType,String charset, Integer connTimeout, Integer readTimeout)
             throws ConnectTimeoutException, SocketTimeoutException, Exception {
         HttpClient client = null;
@@ -113,11 +100,11 @@ public class HttpClientUtils {
 
             HttpResponse res;
             if (url.startsWith("https")) {
-                // 执行 Https 请求.
+                //  Https request
                 client = createSSLInsecureClient();
                 res = client.execute(post);
             } else {
-                // 执行 Http 请求.
+
                 client = HttpClientUtils.client;
                 res = client.execute(post);
             }
@@ -133,7 +120,7 @@ public class HttpClientUtils {
 
 
     /**
-     * 提交form表单
+     *
      *
      * @param url
      * @param params
@@ -165,7 +152,7 @@ public class HttpClientUtils {
                     post.addHeader(entry.getKey(), entry.getValue());
                 }
             }
-            // 设置参数
+            // set params
             RequestConfig.Builder customReqConf = RequestConfig.custom();
             if (connTimeout != null) {
                 customReqConf.setConnectTimeout(connTimeout);
@@ -176,11 +163,11 @@ public class HttpClientUtils {
             post.setConfig(customReqConf.build());
             HttpResponse res = null;
             if (url.startsWith("https")) {
-                // 执行 Https 请求.
+
                 client = createSSLInsecureClient();
                 res = client.execute(post);
             } else {
-                // 执行 Http 请求.
+
                 client = HttpClientUtils.client;
                 res = client.execute(post);
             }
@@ -195,7 +182,7 @@ public class HttpClientUtils {
     }
 
     /**
-     * 发送一个 GET 请求
+     * GET
      */
     public static String get(String url, String charset, Integer connTimeout,Integer readTimeout)
             throws ConnectTimeoutException,SocketTimeoutException, Exception {
@@ -204,7 +191,7 @@ public class HttpClientUtils {
         HttpGet get = new HttpGet(url);
         String result = "";
         try {
-            // 设置参数
+
             RequestConfig.Builder customReqConf = RequestConfig.custom();
             if (connTimeout != null) {
                 customReqConf.setConnectTimeout(connTimeout);
@@ -217,11 +204,11 @@ public class HttpClientUtils {
             HttpResponse res = null;
 
             if (url.startsWith("https")) {
-                // 执行 Https 请求.
+
                 client = createSSLInsecureClient();
                 res = client.execute(get);
             } else {
-                // 执行 Http 请求.
+
                 client = HttpClientUtils.client;
                 res = client.execute(get);
             }
@@ -236,9 +223,7 @@ public class HttpClientUtils {
         return result;
     }
 
-    /**
-     * 从 response 里获取 charset
-     */
+
     @SuppressWarnings("unused")
     private static String getCharsetFromResponse(HttpResponse ressponse) {
         // Content-Type:text/html; charset=GBK
@@ -252,7 +237,7 @@ public class HttpClientUtils {
     }
 
     /**
-     * 创建 SSL连接
+     * create SSL connection
      * @return
      * @throws GeneralSecurityException
      */

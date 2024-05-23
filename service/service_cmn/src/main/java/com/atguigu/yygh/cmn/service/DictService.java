@@ -15,26 +15,26 @@ import java.util.List;
 public interface DictService extends IService<Dict> {
 
 	/**
-	 * 根据id查询子数据列表
+	 *
 	 * @param id
 	 * @return
 	 */
 	List<Dict> findChildData(Long id);
 
 	/**
-	 * 导出数据字典接口
-	 * @param response 响应输出流
+	 *
+	 * @param response
 	 */
 	void exportDictData(HttpServletResponse response);
 
 	/**
-	 * 导入数据字典接口
-	 * @param multipartFile Excel文件
+	 *
+	 * @param multipartFile
 	 */
 	void importDictData(MultipartFile multipartFile);
 
 	/**
-	 * 根据dictcode和value查询
+	 *
 	 * @param dictCode
 	 * @param value
 	 * @return
@@ -42,7 +42,7 @@ public interface DictService extends IService<Dict> {
 	String getDictName(String dictCode, String value);
 
 	/**
-	 * //根据dictCode获取下级节点
+	 *
 	 * @param dictCode
 	 * @return
 	 */

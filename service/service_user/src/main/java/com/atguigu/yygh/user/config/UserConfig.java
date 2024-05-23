@@ -8,10 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @MapperScan("com.atguigu.yygh.user.mapper")
 public class UserConfig {
-	/**
-	 * 分页插件
-	 *
-	 */
+
 	@Bean
 	public PaginationInterceptor paginationInterceptor(){
 		return new PaginationInterceptor();

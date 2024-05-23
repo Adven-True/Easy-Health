@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class HospConfig {
 
 	/**
-	 * 分页插件
+	 *
 	 *
 	 */
 	@Bean

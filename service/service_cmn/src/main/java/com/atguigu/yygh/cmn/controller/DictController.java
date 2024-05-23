@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-@Api(value = "数据字典接口")
+@Api(value = "dict interface")
 @RestController
 @RequestMapping("/admin/cmn/dict")
 public class DictController {
@@ -25,25 +25,25 @@ public class DictController {
 
 
 	/**
-	 * 导入数据
-	 * @param multipartFile Excel文件
-	 * @return 响应结果
+	 * import data
+	 * @param multipartFile Excel file
+	 * @return response
 	 */
 	@PostMapping("importData")
-	@CacheEvict(value = "dict", allEntries=true)//修改更新缓存
+	@CacheEvict(value = "dict", allEntries=true)//update cache
 	public Result importDict(MultipartFile multipartFile){
 		if (multipartFile!=null){
 			dictService.importDictData(multipartFile);
 			return Result.ok();
 		}
-		System.out.println("multipartFile 为空");
+		System.out.println("multipartFile is null");
 		return Result.fail();
 	}
 
 	/**
-	 * 导出数据字典接口
-	 * @param response 响应输出流，将Excel返回
-	 * @return 导出结果
+	 *
+	 * @param response
+	 * @return
 	 */
 	@GetMapping("exportData")
 	public void exportDict(HttpServletResponse response){
@@ -51,32 +51,31 @@ public class DictController {
 	}
 
 	/**
-	 * 根据数据id查询它下面的子数据列表
-	 * @param id 数据id
-	 * @return 子数据列表
+	 *
+	 * @param id
+	 * @return
 	 */
 	@GetMapping("findChildData/{id}")
-//	@Cacheable(value = "dict",keyGenerator = "keyGenerator")//将第一次查询结果放入缓存当中
+//	@Cacheable(value = "dict",keyGenerator = "keyGenerator")
 	public Result findChildData(@PathVariable("id") Long id){
 		List<Dict> list = dictService.findChildData(id);
 		return Result.ok(list);
 	}
 
-	//根据dictcode和value查询（查询医院）
 	@GetMapping("getName/{dictCode}/{value}")
 	public String getName(@PathVariable("dictCode") String dictCode,
 						  @PathVariable("value") String value){
 		String dictName = dictService.getDictName(dictCode,value);
 		return dictName;
 	}
-	//根据value查询（查询地区）
+
 	@GetMapping("getName/{value}")
 	public String getName(@PathVariable("value") String value){
 		String dictName = dictService.getDictName("",value);
 		return dictName;
 	}
 
-	//根据dictCode获取下级节点
+
 	@ApiOperation(value="根据dictCode获取下级节点")
 	@GetMapping("findByDictCode/{dictCode}")
 	public Result<List<Dict>> findByDictCode(@PathVariable("dictCode") String dictCode){

@@ -17,16 +17,16 @@ public class ScheduleController {
 	@Autowired
 	private ScheduleService scheduleService;
 
-	//根据医院编号和科室编号查询排版规则数据
-	@ApiOperation(value = "查询排版规则数据")
+	//
+	@ApiOperation(value = "findSchedulerule")
 	@GetMapping("getScheduleRule/{page}/{limit}/{hoscode}/{depcode}")
 	public Result getScheduleRule(@PathVariable("page") long page, @PathVariable("limit") long limit,
 								  @PathVariable("hoscode") String hoscode, @PathVariable("depcode") String depcode) {
 		Map<String, Object> map = scheduleService.getRuleSchedule(page,limit,hoscode,depcode);
 		return Result.ok(map);
 	}
-	//根据医院编号、科室编号和工作日期，查询排班详细信息
-	@ApiOperation(value = "查询排班详细信息")
+	//
+	@ApiOperation(value = "findScheduleInfo")
 	@GetMapping("getScheduleDetail/{hoscode}/{depcode}/{workDate}")
 	public Result getScheduleDetail(@PathVariable("hoscode") String hoscode,
 									@PathVariable("depcode") String depcode,

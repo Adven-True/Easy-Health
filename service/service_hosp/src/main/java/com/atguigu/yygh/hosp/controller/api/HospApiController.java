@@ -41,82 +41,82 @@ public class HospApiController {
 	@Autowired
 	private HospitalSetService hospitalSetService;
 
-	@ApiOperation("查询医院列表功能")
+	@ApiOperation("hosp list")
 	@GetMapping("findHospList/{page}/{limit}")
 	public Result findHospList(@PathVariable Integer page, @PathVariable Integer limit, HospitalQueryVo hospitalQueryVo){
 		Page<Hospital> result = hospitalService.selectHospitalPage(page, limit, hospitalQueryVo);
 		return Result.ok(result);
 	}
 
-	@ApiOperation("根据医院名称查询")
+	@ApiOperation("fingByName")
 	@GetMapping("findByHosName/{hosname}")
 	public Result findByHosName(@PathVariable String hosname){
 		List<Hospital> list = hospitalService.findByHosName(hosname);
 		return Result.ok(list);
 	}
 
-	@ApiOperation("根据医院编号获取科室")
+	@ApiOperation("findDepartByHospId")
 	@GetMapping("department/{hoscode}")
 	public Result index(@PathVariable String hoscode){
 		List<DepartmentVo> departmentVoList = departmentService.findDeptTree(hoscode);
 		return Result.ok(departmentVoList);
 	}
 
-	@ApiOperation("根据医院编号获取医院预约挂号详情")
+	@ApiOperation("findOrderByHospId")
 	@GetMapping("findHospDetail/{hoscode}")
 	public Result findHospDetail(@PathVariable String hoscode){
 		Map<String, Object> map = hospitalService.item(hoscode);
 		return Result.ok(map);
 	}
 
-	@ApiOperation(value = "获取可预约排班数据")
+	@ApiOperation(value = "findAvailable")
 	@GetMapping("auth/getBookingScheduleRule/{page}/{limit}/{hoscode}/{depcode}")
 	public Result getBookingScheduleRule(
-			@ApiParam(name = "page", value = "当前页码", required = true)
+			@ApiParam(name = "page", value = "current page number", required = true)
 			@PathVariable Integer page,
-			@ApiParam(name = "limit", value = "每页记录数", required = true)
+			@ApiParam(name = "limit", value = "records on each page", required = true)
 			@PathVariable Integer limit,
-			@ApiParam(name = "hoscode", value = "医院code", required = true)
+			@ApiParam(name = "hoscode", value = "hospital code", required = true)
 			@PathVariable String hoscode,
-			@ApiParam(name = "depcode", value = "科室code", required = true)
+			@ApiParam(name = "depcode", value = "department code", required = true)
 			@PathVariable String depcode) {
 		return Result.ok(scheduleService.getBookingScheduleRule(page, limit, hoscode, depcode));
 	}
 
-	@ApiOperation(value = "获取排班数据")
+	@ApiOperation(value = "findScheduleData")
 	@GetMapping("auth/findScheduleList/{hoscode}/{depcode}/{workDate}")
 	public Result findScheduleList(
-			@ApiParam(name = "hoscode", value = "医院code", required = true)
+			@ApiParam(name = "hoscode", value = "hospital code", required = true)
 			@PathVariable String hoscode,
-			@ApiParam(name = "depcode", value = "科室code", required = true)
+			@ApiParam(name = "depcode", value = "department code", required = true)
 			@PathVariable String depcode,
-			@ApiParam(name = "workDate", value = "排班日期", required = true)
+			@ApiParam(name = "workDate", value = "scheduleDate", required = true)
 			@PathVariable String workDate) {
 		return Result.ok(scheduleService.getDetailSchedule(hoscode, depcode, workDate));
 	}
 
-	@ApiOperation(value = "根据排班id获取排班数据")
+	@ApiOperation(value = "findDataByScheduleId")
 	@GetMapping("getSchedule/{scheduleId}")
 	public Result getSchedule(
-			@ApiParam(name = "scheduleId", value = "排班id", required = true)
+			@ApiParam(name = "scheduleId", value = "schedule id", required = true)
 			@PathVariable String scheduleId) {
 		return Result.ok(scheduleService.getById(scheduleId));
 	}
 
-	//需要远程调用
-	@ApiOperation(value = "根据排班id获取预约下单数据")
+	//
+	@ApiOperation(value = "fingOrderByScheduleId")
 	@GetMapping("inner/getScheduleOrderVo/{scheduleId}")
 	public ScheduleOrderVo getScheduleOrderVo(
-			@ApiParam(name = "scheduleId", value = "排班id", required = true)
+			@ApiParam(name = "scheduleId", value = "schedule id", required = true)
 			@PathVariable("scheduleId") String scheduleId) {
 		return scheduleService.getScheduleOrderVo(scheduleId);
 	}
 
-	//需要远程调用
-	@ApiOperation(value = "获取医院签名信息")
+	//
+	@ApiOperation(value = "findHospSignData")
 	@GetMapping("inner/getSignInfoVo/{hoscode}")
 	public SignInfoVo getSignInfoVo(
-			@ApiParam(name = "hoscode", value = "医院code", required = true)
+			@ApiParam(name = "hoscode", value = "hospital code", required = true)
 			@PathVariable("hoscode") String hoscode) {
 		return hospitalSetService.getSignInfoVo(hoscode);
 	}

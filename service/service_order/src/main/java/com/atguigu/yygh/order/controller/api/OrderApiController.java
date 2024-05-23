@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-@Api(tags = "订单接口")
+@Api(tags = "order interface")
 @RestController
 @RequestMapping("/api/order/orderInfo")
 public class OrderApiController {
@@ -33,22 +33,22 @@ public class OrderApiController {
         return Result.ok(orderId);
     }
 
-    @ApiOperation(value = "创建订单")
+    @ApiOperation(value = "create order")
     @PostMapping("auth/submitOrder/{scheduleId}/{patientId}")
     public Result submitOrder(
-            @ApiParam(name = "scheduleId", value = "排班id", required = true)
+            @ApiParam(name = "scheduleId", value = "schedule id", required = true)
             @PathVariable String scheduleId,
-            @ApiParam(name = "patientId", value = "就诊人id", required = true)
+            @ApiParam(name = "patientId", value = "patient id", required = true)
             @PathVariable Long patientId) {
         return Result.ok(orderService.saveOrder(scheduleId, patientId));
     }
 
-    //订单列表（条件查询带分页）
+
     @GetMapping("auth/{page}/{limit}")
     public Result Orderlist(@PathVariable Long page,
                        @PathVariable Long limit,
                        OrderQueryVo orderQueryVo, HttpServletRequest request) {
-        //设置当前用户id
+        //set user id
         orderQueryVo.setUserId(AuthContextHolder.getUserId(request));
         Page<OrderInfo> pageParam = new Page<>(page,limit);
         IPage<OrderInfo> pageModel =
@@ -60,7 +60,7 @@ public class OrderApiController {
     public Result UserOrderlist(@PathVariable Long page,
                        @PathVariable Long limit,
                        OrderQueryVo orderQueryVo, HttpServletRequest request) {
-        //设置当前用户id
+        //set current user id
         orderQueryVo.setUserId(AuthContextHolder.getUserId(request));
         Page<OrderInfo> pageParam = new Page<>(page,limit);
         IPage<OrderInfo> pageModel =
@@ -68,26 +68,26 @@ public class OrderApiController {
         return Result.ok(pageModel);
     }
 
-    @ApiOperation(value = "获取订单状态")
+    @ApiOperation(value = "find order state")
     @GetMapping("auth/getStatusList")
     public Result getStatusList() {
         return Result.ok(OrderStatusEnum.getStatusList());
     }
-    //根据订单id查询订单详情
+
     @GetMapping("auth/getOrders/{orderId}")
     public Result getOrders(@PathVariable Long orderId) {
         OrderInfo orderInfo = orderService.getOrderInfo(orderId);
         return Result.ok(orderInfo);
     }
-    @ApiOperation(value = "取消预约")
+    @ApiOperation(value = "cancel reservation")
     @GetMapping("auth/cancelOrder/{orderId}")
     public Result cancelOrder(
-            @ApiParam(name = "orderId", value = "订单id", required = true)
+            @ApiParam(name = "orderId", value = "order id", required = true)
             @PathVariable("orderId") Long orderId) {
         return Result.ok(orderService.cancelOrder(orderId));
     }
 
-    @ApiOperation(value = "获取订单统计数据")
+    @ApiOperation(value = "find order statistical data")
     @GetMapping("auth/getCountMap")
     public Map<String, Object> getCountMap(@RequestBody OrderCountQueryVo orderCountQueryVo) {
         return orderService.getCountMap(orderCountQueryVo);

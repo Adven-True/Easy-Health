@@ -25,30 +25,30 @@ public class WXController {
 	@Autowired
 	private PaymentService paymentService;
 
-	//生成微信支付扫描的二维码
+	//generate QR code
 	@GetMapping("/createNative/{orderId}")
 	public Result createNative(@PathVariable Long orderId){
 		Map map = wxService.createNative(orderId);
 		return Result.ok(map);
 	}
 
-	@ApiOperation(value = "查询支付状态")
+	@ApiOperation(value = "check payment status")
 	@GetMapping("/queryPayStatus/{orderId}")
 	public Result queryPayStatus(
-			@ApiParam(name = "orderId", value = "订单id", required = true)
+			@ApiParam(name = "orderId", value = "order id", required = true)
 			@PathVariable("orderId") Long orderId) {
-		//调用查询接口
+		//call interface
 		Map<String, String> resultMap = wxService.queryPayStatus(orderId, PaymentTypeEnum.WEIXIN.name());
-		if (resultMap == null) {//出错
-			return Result.fail().message("支付出错");
+		if (resultMap == null) {//error
+			return Result.fail().message("pay error");
 		}
-		if ("SUCCESS".equals(resultMap.get("trade_state"))) {//如果成功
-			//更改订单状态，处理支付结果
+		if ("SUCCESS".equals(resultMap.get("trade_state"))) {//if succeed
+			//update order status
 			String out_trade_no = resultMap.get("out_trade_no");
 			paymentService.paySuccess(out_trade_no, PaymentTypeEnum.WEIXIN.getStatus(), resultMap);
-			return Result.ok().message("支付成功");
+			return Result.ok().message("pay succeed");
 		}
-		return Result.ok().message("支付中");
+		return Result.ok().message("payment pending");
 	}
 
 }

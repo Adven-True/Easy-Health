@@ -46,52 +46,52 @@ public class WXServiceImpl implements WXService {
 
 	@Autowired
 	private RabbitService rabbitService;
-	//生成微信支付二维码
+	//generate QR code
 	@Override
 	public Map createNative(Long orderId) {
 		try {
-			//先从redis中取，如果有直接返回，没有再添加到数据库中
+
 			Map payMap = (Map) redisTemplate.opsForValue().get(orderId.toString());
 			if (payMap!=null){
 				return payMap;
 			}
-			//根据orderId获取订单信息
+
 			OrderInfo order = orderService.getById(orderId);
 
-			//设置参数
+
 			Map paramMap = new HashMap();
 			paramMap.put("appid", ConstantPropertiesUtils.APPID);
 			paramMap.put("mch_id", ConstantPropertiesUtils.PARTNER);
 			paramMap.put("nonce_str", WXPayUtil.generateNonceStr());
-			String body = order.getReserveDate() + "就诊"+ order.getDepname();
+			String body = order.getReserveDate() + "check in"+ order.getDepname();
 			paramMap.put("body", body);
 			paramMap.put("out_trade_no", order.getOutTradeNo());
 			//paramMap.put("total_fee", order.getAmount().multiply(new BigDecimal("100")).longValue()+"");
-			paramMap.put("total_fee", "1");//测试0.01元
+			paramMap.put("total_fee", "1");//
 			paramMap.put("spbill_create_ip", "127.0.0.1");
 			paramMap.put("notify_url", "http://guli.shop/api/order/weixinPay/weixinNotify");
 			paramMap.put("trade_type", "NATIVE");
-			//调用微信生成二维码接口
+			//generate interface
 			HttpClient client = new HttpClient("https://api.mch.weixin.qq.com/pay/unifiedorder");
-			//设置Map中的参数
+			//set params
 			client.setXmlParam(WXPayUtil.generateSignedXml(paramMap,ConstantPropertiesUtils.PARTNERKEY));
 			client.setHttps(true);
 			client.post();
-			//微信那边返回相关数据
+			//return data
 			String xml = client.getContent();
-			//xml转换map
+			//xml to map
 			Map<String, String> resultMap = WXPayUtil.xmlToMap(xml);
 			System.out.println("resultMap:"+resultMap);
-			//4、封装返回结果集
+			//encapsulation
 			Map map = new HashMap<>();
 			if (resultMap!=null){
-				//向支付记录表中添加数据
+				//add records
 				paymentService.savePaymentInfo(order, PaymentTypeEnum.WEIXIN.getStatus());
 				map.put("orderId", orderId);
 				map.put("totalFee", order.getAmount());
 				map.put("resultCode", resultMap.get("result_code"));
-				map.put("codeUrl", resultMap.get("code_url"));//二维码地址
-				//redis缓存
+				map.put("codeUrl", resultMap.get("code_url"));
+				//redis
 				if (resultMap.get("result_code")!=null){
 					redisTemplate.opsForValue().set(orderId.toString(),map,120, TimeUnit.MINUTES);
 				}
@@ -107,21 +107,21 @@ public class WXServiceImpl implements WXService {
 	public Map queryPayStatus(Long orderId, String paymentType) {
 		try {
 			OrderInfo orderInfo = orderService.getById(orderId);
-			//1、封装参数
+			//1、encapsulation
 			Map paramMap = new HashMap<>();
 			paramMap.put("appid", ConstantPropertiesUtils.APPID);
 			paramMap.put("mch_id", ConstantPropertiesUtils.PARTNER);
 			paramMap.put("out_trade_no", orderInfo.getOutTradeNo());
 			paramMap.put("nonce_str", WXPayUtil.generateNonceStr());
-			//2、设置请求
+			//2、request
 			HttpClient client = new HttpClient("https://api.mch.weixin.qq.com/pay/orderquery");
 			client.setXmlParam(WXPayUtil.generateSignedXml(paramMap, ConstantPropertiesUtils.PARTNERKEY));
 			client.setHttps(true);
 			client.post();
-			//3、返回第三方的数据，转成Map
+			//3、return data to Map
 			String xml = client.getContent();
 			Map<String, String> resultMap = WXPayUtil.xmlToMap(xml);
-			//4、返回
+			//4、return
 			return resultMap;
 		} catch (Exception e) {
 			return null;
@@ -138,12 +138,12 @@ public class WXServiceImpl implements WXService {
 				return true;
 			}
 			Map<String,String> paramMap = new HashMap<>(8);
-			paramMap.put("appid",ConstantPropertiesUtils.APPID);       //公众账号ID
-			paramMap.put("mch_id",ConstantPropertiesUtils.PARTNER);   //商户编号
+			paramMap.put("appid",ConstantPropertiesUtils.APPID);       //Public account ID
+			paramMap.put("mch_id",ConstantPropertiesUtils.PARTNER);   //Merchant ID
 			paramMap.put("nonce_str",WXPayUtil.generateNonceStr());
-			paramMap.put("transaction_id",paymentInfoQuery.getTradeNo()); //微信订单号
-			paramMap.put("out_trade_no",paymentInfoQuery.getOutTradeNo()); //商户订单编号
-			paramMap.put("out_refund_no","tk"+paymentInfoQuery.getOutTradeNo()); //商户退款单号
+			paramMap.put("transaction_id",paymentInfoQuery.getTradeNo()); //WeChat order number
+			paramMap.put("out_trade_no",paymentInfoQuery.getOutTradeNo()); //Merchant order number
+			paramMap.put("out_refund_no","tk"+paymentInfoQuery.getOutTradeNo()); //Merchant refund number
 //       paramMap.put("total_fee",paymentInfoQuery.getTotalAmount().multiply(new BigDecimal("100")).longValue()+"");
 //       paramMap.put("refund_fee",paymentInfoQuery.getTotalAmount().multiply(new BigDecimal("100")).longValue()+"");
 			paramMap.put("total_fee","1");
@@ -155,7 +155,7 @@ public class WXServiceImpl implements WXService {
 			client.setCert(true);
 			client.setCertPassword(ConstantPropertiesUtils.PARTNER);
 			client.post();
-			//3、返回第三方的数据
+			//3、return third party data
 			String xml = client.getContent();
 			Map<String, String> resultMap = WXPayUtil.xmlToMap(xml);
 			if (WXPayConstants.SUCCESS.equalsIgnoreCase(resultMap.get("result_code"))) {
@@ -164,8 +164,8 @@ public class WXServiceImpl implements WXService {
 				refundInfo.setRefundStatus(RefundStatusEnum.REFUND.getStatus());
 				refundInfo.setCallbackContent(JSONObject.toJSONString(resultMap));
 				refundInfoService.updateById(refundInfo);
-				//退款成功（有延迟)
-				SendMsmMq.sendMq(orderInfo,refundInfo,"退款成功",rabbitService);
+
+				SendMsmMq.sendMq(orderInfo,refundInfo,"refund succeed",rabbitService);
 				return true;
 			}
 			return false;

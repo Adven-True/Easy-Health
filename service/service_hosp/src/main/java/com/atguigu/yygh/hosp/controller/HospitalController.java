@@ -19,7 +19,7 @@ public class HospitalController {
 	@Autowired
 	private HospitalService hospitalService;
 
-	//分页查询医院列表
+	//
 	@GetMapping("list/{page}/{limit}")
 	public Result HospitalList(@PathVariable("page") Integer page,
 							   @PathVariable("limit") Integer limit,
@@ -28,8 +28,8 @@ public class HospitalController {
 
 		return Result.ok(hospitalPage);
 	}
-	//更新医院上线状态
-	@ApiOperation(value = "更新医院上线状态")
+	//
+	@ApiOperation(value = "updateHospOnline")
 	@GetMapping("updateHospStatus/{id}/{status}")
 	public Result updateHospStatus(@PathVariable("id") String id,@PathVariable("status") Integer status){
 		hospitalService.updateStatus(id,status);
@@ -37,7 +37,7 @@ public class HospitalController {
 	}
 
 	//查看医院详情信息
-	@ApiOperation("医院详情信息")
+	@ApiOperation("hospDetail")
 	@GetMapping("showHospDetail/{id}")
 	public Result showHospDetail(@PathVariable("id") String id){
 	  	Map<String, Object> hospital = hospitalService.getHospById(id);

@@ -38,13 +38,13 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
         String path = request.getURI().getPath();
         System.out.println("==="+path);
 
-        //内部服务接口，不允许外部访问
+        //internal interface limited
         if(antPathMatcher.match("/**/inner/**", path)) {
             ServerHttpResponse response = exchange.getResponse();
             return out(response, ResultCodeEnum.PERMISSION);
         }
 
-        //api接口，异步请求，校验用户必须登录
+        //api，asunc，need to login in
         if(antPathMatcher.match("/api/**/auth/**", path)) {
             Long userId = this.getUserId(request);
             if(StringUtils.isEmpty(userId)) {
@@ -61,7 +61,7 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
     }
 
     /**
-     * api接口鉴权失败返回数据
+     * authorization fail return
      * @param response
      * @return
      */
@@ -69,13 +69,13 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
         Result result = Result.build(null, resultCodeEnum);
         byte[] bits = JSONObject.toJSONString(result).getBytes(StandardCharsets.UTF_8);
         DataBuffer buffer = response.bufferFactory().wrap(bits);
-        //指定编码，否则在浏览器中会中文乱码
+
         response.getHeaders().add("Content-Type", "application/json;charset=UTF-8");
         return response.writeWith(Mono.just(buffer));
     }
 
     /**
-     * 获取当前登录用户id
+     * user id
      * @param request
      * @return
      */

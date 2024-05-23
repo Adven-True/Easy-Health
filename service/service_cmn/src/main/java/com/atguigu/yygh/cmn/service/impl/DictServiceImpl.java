@@ -28,7 +28,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 
 
 	@Override
-	@Cacheable(value = "dict",keyGenerator = "keyGenerator")  //添加缓存
+	@Cacheable(value = "dict",keyGenerator = "keyGenerator")  //add caching
 	public List<Dict> findChildData(Long id) {
 		QueryWrapper<Dict> wrapper = new QueryWrapper<>();
 		wrapper.eq("parent_id",id);
@@ -39,16 +39,16 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 		return dictList;
 	}
 
-	//导出数据字典接口
+	//
 
 	@Override
 	public void exportDictData(HttpServletResponse response) {
-		//设置下载信息
+		//config download info
 		response.setContentType("application/vnd.ms-excel");
 		response.setCharacterEncoding("utf-8");
 		String fileName = "DataDict-"+ UUID.randomUUID();
 		response.setHeader("Content-disposition", "attachment;filename="+ fileName + ".xlsx");
-		//查询数据库
+		//query
 		List<Dict> dictList = baseMapper.selectList(null);
 		//Dict-->DictVo
 		List<DictEeVo> dictEeVoList = new ArrayList<>();
@@ -57,31 +57,31 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 			BeanUtils.copyProperties(dict,dictEeVo);
 			dictEeVoList.add(dictEeVo);
 		}
-		//调用方法进行写操作
+		//write
 		try {
-			EasyExcel.write(response.getOutputStream(), DictEeVo.class).sheet("数据字典")
+			EasyExcel.write(response.getOutputStream(), DictEeVo.class).sheet("dict")
 					 .doWrite(dictEeVoList);
 		} catch (IOException e) {
-			throw new YyghException("导出异常",500);
+			throw new YyghException("export error",500);
 		}
 	}
 
-	//导入Excel数据
+	//
 
 	@Override
-	@CacheEvict(value = "dict", allEntries=true)  //表示清空缓存中的所有内容
+	@CacheEvict(value = "dict", allEntries=true)  //flush caching
 	public void importDictData(MultipartFile multipartFile) {
 		try {
 			EasyExcel.read(multipartFile.getInputStream(),DictEeVo.class,new DictListener(baseMapper))
 			         .sheet().doRead();
 		} catch (IOException e) {
-			throw new YyghException("导入失败",500);
+			throw new YyghException("import error",500);
 		}
 	}
 
 	@Override
 	public String getDictName(String dictCode, String value) {
-		//如果dictCode为空，则只进行value查询
+		//
 		if (StringUtils.isEmpty(dictCode)){
 			QueryWrapper<Dict> wrapper = new QueryWrapper<>();
 			wrapper.eq("value",value);
@@ -91,8 +91,8 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 			}else {
 				return null;
 			}
-		}else {//如果dictCode不为空，则进行dictCode和value一起查询
-			//先根据dictCode查询Dict对应的id
+		}else {
+
 			QueryWrapper<Dict> wrapper = new QueryWrapper<>();
 			wrapper.eq("dict_code",dictCode);
 			Dict dict = baseMapper.selectOne(wrapper);
@@ -103,9 +103,9 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 
 	@Override
 	public List<Dict> findByDictCode(String dictCode) {
-		//现根据dictCode获取对应id
+
 		Dict dict = getDictByDictCode(dictCode);
-		//再根据id获取下层子节点
+
 		List<Dict> childData = findChildData(dict.getId());
 		if (childData==null){
 			return null;
@@ -126,7 +126,7 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 		return dict.getName();
 	}
 
-	//判断id下面是否有子节点
+
 	private boolean isChild(Long id){
 		QueryWrapper<Dict> wrapper = new QueryWrapper<>();
 		wrapper.eq("parent_id",id);

@@ -22,7 +22,7 @@
             <artifactId>service_cmn_client</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
-        <!--rabbitmq消息队列-->
+        <!--rabbitmq-->
         <dependency>
             <groupId>com.matin</groupId>
             <artifactId>rabbit-util</artifactId>

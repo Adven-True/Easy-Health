@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @MapperScan("com.atguigu.yygh.order.mapper")
 public class OrderConfig {
 	/**
-	 * 分页插件
+	 *
 	 *
 	 */
 	@Bean

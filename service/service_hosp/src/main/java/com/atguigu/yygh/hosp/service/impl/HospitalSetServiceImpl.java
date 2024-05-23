@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class HospitalSetServiceImpl extends ServiceImpl<HospitalSetMapper, HospitalSet> implements HospitalSetService {
 
-	//根据传递过来的医院编码，查询数据库，查询签名
+
 	@Override
 	public String getSignKey(String hosCode) {
 		QueryWrapper<HospitalSet> wrapper = new QueryWrapper<>();
@@ -30,7 +30,7 @@ public class HospitalSetServiceImpl extends ServiceImpl<HospitalSetMapper, Hospi
 
 	}
 
-	//获取医院签名信息
+
 	@Override
 	public SignInfoVo getSignInfoVo(String hoscode) {
 		QueryWrapper<HospitalSet> wrapper = new QueryWrapper<>();

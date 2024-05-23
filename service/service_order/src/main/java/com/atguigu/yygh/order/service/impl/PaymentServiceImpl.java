@@ -37,19 +37,19 @@ public class PaymentServiceImpl extends ServiceImpl<PaymentMapper, PaymentInfo> 
 	@Autowired
 	private HospitalFeignClient hospitalFeignClient;
 
-	//向支付记录表中添加数据
+
 	@Override
 	public void savePaymentInfo(OrderInfo order, Integer status) {
-		//先根据订单id和支付类型查询支付记录表中是否有相同订单
+
 		QueryWrapper<PaymentInfo> wrapper = new QueryWrapper<>();
 		wrapper.eq("order_id",order.getId());
 		wrapper.eq("payment_type",status);
 		Integer count = baseMapper.selectCount(wrapper);
-		//有数据直接返回
+
 		if (count>0){
 			return;
 		}
-		//添加记录
+
 		PaymentInfo paymentInfo = new PaymentInfo();
 		paymentInfo.setCreateTime(new Date());
 		paymentInfo.setOrderId(order.getId());
@@ -63,7 +63,7 @@ public class PaymentServiceImpl extends ServiceImpl<PaymentMapper, PaymentInfo> 
 	}
 
 	/**
-	 * 支付成功
+	 * succeed
 	 */
 	@Override
 	public void paySuccess(String outTradeNo,Integer paymentType, Map<String,String> paramMap) {
@@ -74,18 +74,18 @@ public class PaymentServiceImpl extends ServiceImpl<PaymentMapper, PaymentInfo> 
 		if (paymentInfo.getPaymentStatus() != PaymentStatusEnum.UNPAID.getStatus()) {
 			return;
 		}
-		//修改支付状态
+		//update status
 		PaymentInfo paymentInfoUpd = new PaymentInfo();
 		paymentInfoUpd.setPaymentStatus(PaymentStatusEnum.PAID.getStatus());
 		paymentInfoUpd.setTradeNo(paramMap.get("transaction_id"));
 		paymentInfoUpd.setCallbackTime(new Date());
 		paymentInfoUpd.setCallbackContent(paramMap.toString());
 		this.updatePaymentInfo(outTradeNo, paymentInfoUpd);
-		//修改订单状态
+		//update order status
 		OrderInfo orderInfo = orderService.getById(paymentInfo.getOrderId());
 		orderInfo.setOrderStatus(OrderStatusEnum.PAID.getStatus());
 		orderService.updateById(orderInfo);
-		// 调用医院接口，通知更新支付状态
+		// update payment status
 		SignInfoVo signInfoVo
 				= hospitalFeignClient.getSignInfoVo(orderInfo.getHoscode());
 		if(null == signInfoVo) {
@@ -110,7 +110,7 @@ public class PaymentServiceImpl extends ServiceImpl<PaymentMapper, PaymentInfo> 
 		return baseMapper.selectOne(queryWrapper);
 	}
 	/**
-	 * 获取支付记录
+	 * payment record
 	 */
 	private PaymentInfo getPaymentInfo(String outTradeNo, Integer paymentType) {
 		QueryWrapper<PaymentInfo> queryWrapper = new QueryWrapper<>();
@@ -119,7 +119,7 @@ public class PaymentServiceImpl extends ServiceImpl<PaymentMapper, PaymentInfo> 
 		return baseMapper.selectOne(queryWrapper);
 	}
 	/**
-	 * 更改支付记录
+	 * edit record
 	 */
 	private void updatePaymentInfo(String outTradeNo, PaymentInfo paymentInfoUpd) {
 		QueryWrapper<PaymentInfo> queryWrapper = new QueryWrapper<>();

@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Component
 public interface DictFeignClient {
 
-	//根据dictcode和value查询（查询医院）
+
 	@GetMapping("/admin/cmn/dict/getName/{dictCode}/{value}")
 	String getName(@PathVariable("dictCode") String dictCode,
 						  @PathVariable("value") String value);
 
 
-	//根据value查询（查询地区）
+
 	@GetMapping("/admin/cmn/dict/getName/{value}")
 	String getName(@PathVariable("value") String value);
 }

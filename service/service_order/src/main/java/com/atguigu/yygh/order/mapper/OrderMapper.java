@@ -11,6 +11,6 @@ import java.util.List;
 
 @Mapper
 public interface OrderMapper extends BaseMapper<OrderInfo> {
-	//查询预约统计数据的方法
-	List<OrderCountVo> selectOrderCount(@Param("vo") OrderCountQueryVo orderCountQueryVo);  //vo 别名
+	//
+	List<OrderCountVo> selectOrderCount(@Param("vo") OrderCountQueryVo orderCountQueryVo);  //vo nickname
 }

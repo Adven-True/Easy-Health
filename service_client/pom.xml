@@ -38,7 +38,7 @@
             <scope>provided </scope>
         </dependency>
 
-        <!-- 服务调用feign -->
+        <!--  feign -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>

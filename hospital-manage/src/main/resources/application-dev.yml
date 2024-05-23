@@ -7,30 +7,30 @@ mybatis-plus:
 spring:
   thymeleaf:
     mode: LEGACYHTML5
-    #编码 可不用配置
+    #
     encoding: UTF-8
-    #开发配置为false,避免修改模板还要重启服务器
+    #Set the development configuration to false to avoid modifying templates and restarting the server
     cache: false
-    #配置模板路径，默认是templates，可以不用配置
+    #Configure the template path
     prefix: classpath:/templates/
   redis:
     host: 127.0.0.1
     port: 6379
     database: 0
     timeout: 1800000
-    password: root123456
+    password: 123456
     lettuce:
       pool:
-        max-active: 20 #最大连接数
-        max-wait: -1    #最大阻塞等待时间(负数表示没限制)
-        max-idle: 5    #最大空闲
-        min-idle: 0     #最小空闲
+        max-active: 20 #maximum connection
+        max-wait: -1    #Maximum blocking waiting time (negative number indicates no limit)
+        max-idle: 5    # max wait
+        min-idle: 0     # min wait
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/yygh_manage?characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password: Mysql123456
+    password: 123456
     hikari:
       connection-test-query: SELECT 1
       connection-timeout: 60000

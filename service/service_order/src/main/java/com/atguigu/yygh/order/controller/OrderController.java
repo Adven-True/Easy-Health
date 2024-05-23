@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-@Api(tags = "订单接口")
+@Api(tags = "order interface")
 @RestController
 @RequestMapping("/admin/order/orderInfo")
 public class OrderController {
@@ -23,7 +23,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @ApiOperation(value = "获取分页列表")
+    @ApiOperation(value = "get pagination list")
     @GetMapping("{page}/{limit}")
     public Result list(@PathVariable int page, @PathVariable int limit, OrderQueryVo orderQueryVo) {
         Page<OrderInfo> pageParam = new Page<>(page,limit);
@@ -31,20 +31,20 @@ public class OrderController {
         return Result.ok(pageModel);
     }
 
-    @ApiOperation(value = "获取订单状态")
+    @ApiOperation(value = "get order status")
     @GetMapping("getStatusList")
     public Result getStatusList() {
         return Result.ok(OrderStatusEnum.getStatusList());
     }
 
-    @ApiOperation(value = "获取订单")
+    @ApiOperation(value = "get order")
     @GetMapping("show/{id}")
     public Result get(
             @ApiParam(name = "orderId", value = "订单id", required = true)
             @PathVariable Long id) {
         return Result.ok(orderService.show(id));
     }
-    @ApiOperation(value = "获取订单统计数据")
+    @ApiOperation(value = "get order statistical data")
     @GetMapping("auth/getCountMap")
     public Result getCountMap(OrderCountQueryVo orderCountQueryVo) {
         return Result.ok(orderService.getCountMap(orderCountQueryVo));

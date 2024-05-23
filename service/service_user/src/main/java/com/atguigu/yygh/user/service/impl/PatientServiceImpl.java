@@ -25,8 +25,7 @@ public class PatientServiceImpl extends ServiceImpl<PatientMapper, Patient> impl
 		QueryWrapper<Patient> wrapper = new QueryWrapper<>();
 		wrapper.eq("user_id",userId);
 		List<Patient> patientList = baseMapper.selectList(wrapper);
-		//通过远程调用得到编码对应的具体内容，查询数据字典表中的内容
-		//做其他参数的封装
+
 		patientList.forEach(this::packagePatient);
 		return patientList;
 	}
@@ -40,15 +39,15 @@ public class PatientServiceImpl extends ServiceImpl<PatientMapper, Patient> impl
 
 	private void packagePatient(Patient patient) {
 		String certificatesTypeString =
-		dictFeignClient.getName(DictEnum.CERTIFICATES_TYPE.getDictCode(), patient.getCertificatesType());//联系人证件
-		//联系人证件类型
+		dictFeignClient.getName(DictEnum.CERTIFICATES_TYPE.getDictCode(), patient.getCertificatesType());//contact ID
+
 		String contactsCertificatesTypeString =
 		dictFeignClient.getName(DictEnum.CERTIFICATES_TYPE.getDictCode(),patient.getContactsCertificatesType());
-		//省
+		//province
 		String provinceString = dictFeignClient.getName(patient.getProvinceCode());
-		//市
+		//city
 		String cityString = dictFeignClient.getName(patient.getCityCode());
-		//区
+		//district
 		String districtString = dictFeignClient.getName(patient.getDistrictCode());
 		patient.getParam().put("certificatesTypeString", certificatesTypeString);
 		patient.getParam().put("contactsCertificatesTypeString", contactsCertificatesTypeString);

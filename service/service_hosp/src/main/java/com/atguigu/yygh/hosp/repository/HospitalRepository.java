@@ -9,9 +9,9 @@ import java.util.List;
 @Repository
 public interface HospitalRepository extends MongoRepository<Hospital,String> {
 
-	//判断是否存在数据
+	//data or not
 	Hospital getHospitalByHoscode(String hoscode);
 
-	//根据医院名称进行模糊查询
+	//Fuzzy query based on hospital name
 	List<Hospital> findHospitalByHosnameLike(String hosname);
 }
