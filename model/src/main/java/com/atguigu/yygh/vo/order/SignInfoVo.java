@@ -9,13 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 
-/**
- * <p>
- * HospitalSet
- * </p>
- *
- * @author xy
- */
+
 @Data
 @ApiModel(description = "signature information")
 public class SignInfoVo  implements Serializable {

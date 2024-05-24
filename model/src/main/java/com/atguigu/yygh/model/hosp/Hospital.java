@@ -11,13 +11,7 @@ import lombok.Data;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-/**
- * <p>
- * Hospital
- * </p>
- *
- * @author xy
- */
+
 @Data
 @ApiModel(description = "Hospital")
 @Document("Hospital")

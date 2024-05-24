@@ -22,9 +22,7 @@ import java.util.Random;
 public class HospitalSetController {
 
 
-	/**
-	 *
-	 */
+
 	@Autowired
 	private HospitalSetService hospitalSetService;
 

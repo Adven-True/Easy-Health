@@ -4,13 +4,7 @@ import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.metadata.BaseRowModel;
 import lombok.Data;
 
-/**
- * <p>
- * Dict
- * </p>
- *
- * @author xy
- */
+
 @Data
 public class DictEeVo {
 

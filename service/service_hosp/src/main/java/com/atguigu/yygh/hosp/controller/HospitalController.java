@@ -36,7 +36,7 @@ public class HospitalController {
 		return Result.ok();
 	}
 
-	//查看医院详情信息
+
 	@ApiOperation("hospDetail")
 	@GetMapping("showHospDetail/{id}")
 	public Result showHospDetail(@PathVariable("id") String id){

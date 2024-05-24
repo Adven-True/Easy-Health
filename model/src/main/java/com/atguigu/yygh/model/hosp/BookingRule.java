@@ -15,13 +15,7 @@ import org.springframework.util.StringUtils;
 import java.util.Date;
 import java.util.List;
 
-/**
- * <p>
- * RegisterRule
- * </p>
- *
- * @author xy
- */
+
 @Data
 @ApiModel(description = "booking rule")
 @Document("BookingRule")

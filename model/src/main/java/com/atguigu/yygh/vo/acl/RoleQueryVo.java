@@ -6,14 +6,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-/**
- * <p>
- * 角色查询实体
- * </p>
- *
- * @author xy
- *
- */
+
 @Data
 @ApiModel(description = "role query entity")
 public class RoleQueryVo implements Serializable {

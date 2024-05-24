@@ -9,10 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @MapperScan("com.atguigu.yygh.hosp.mapper")
 public class HospConfig {
 
-	/**
-	 *
-	 *
-	 */
+
 	@Bean
 	public PaginationInterceptor paginationInterceptor(){
 		return new PaginationInterceptor();

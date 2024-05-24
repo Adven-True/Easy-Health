@@ -9,9 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-/**
- * @author Administrator
- */
+
 public interface DictService extends IService<Dict> {
 
 	/**

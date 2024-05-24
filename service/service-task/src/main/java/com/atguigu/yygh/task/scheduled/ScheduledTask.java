@@ -9,10 +9,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
-/**
- * @author lijian
- * @create 2021-05-05 17:03
- */
+
 
 @Component
 @EnableScheduling  //Enable scheduled task operations

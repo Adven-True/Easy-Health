@@ -10,13 +10,7 @@ import lombok.Data;
 
 import java.util.Date;
 
-/**
- * <p>
- * RegisterRule
- * </p>
- *
- * @author xy
- */
+
 @Data
 @ApiModel(description = "Appointment Scheduling Rules Data")
 public class BookingScheduleRuleVo {

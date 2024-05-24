@@ -124,15 +124,15 @@ public class HospitalServiceImpl implements HospitalService {
 		return result;
 	}
 
-	//获取查询医院等级信息
+	//get hospital level
 	private Hospital setHospitalHosType(Hospital hospital) {
-		//查询省市区
+		//find province
 		String provinceString = dictFeignClient.getName(hospital.getProvinceCode());
 		String cityString = dictFeignClient.getName(hospital.getCityCode());
 		String districtString = dictFeignClient.getName(hospital.getDistrictCode());
 
 
-		//查询医院类型
+		//find hosp type
 		String hostypeString = dictFeignClient.getName("Hostype", hospital.getHostype());
 
 		hospital.getParam().put("hostypeString",hostypeString);

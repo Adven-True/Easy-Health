@@ -13,9 +13,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author Administrator
- */
+
 @Data
 public class BaseEntity implements Serializable {
 
@@ -32,9 +30,7 @@ public class BaseEntity implements Serializable {
     @TableField("update_time")
     private Date updateTime;
 
-    /**
-     * @TableLogic representing：logical deletion
-     */
+
     @ApiModelProperty(value = "Logical Deletion (1: Deleted, 0: Not Deleted)")
     @TableLogic
     @TableField("is_deleted")

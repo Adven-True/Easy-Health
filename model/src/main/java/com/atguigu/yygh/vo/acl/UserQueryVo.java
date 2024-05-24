@@ -6,14 +6,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-/**
- * <p>
- * 用户查询实体
- * </p>
- *
- * @author xy
- *
- */
+
 @Data
 @ApiModel(description = "user query entity")
 public class UserQueryVo implements Serializable {

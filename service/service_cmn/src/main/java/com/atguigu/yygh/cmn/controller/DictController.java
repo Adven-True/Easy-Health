@@ -76,7 +76,7 @@ public class DictController {
 	}
 
 
-	@ApiOperation(value="根据dictCode获取下级节点")
+	@ApiOperation(value="get child endpoint according to dictCode")
 	@GetMapping("findByDictCode/{dictCode}")
 	public Result<List<Dict>> findByDictCode(@PathVariable("dictCode") String dictCode){
 		List<Dict> list = dictService.findByDictCode(dictCode);

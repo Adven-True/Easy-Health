@@ -10,13 +10,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.Date;
 
-/**
- * <p>
- * RefundInfo
- * </p>
- *
- * @author xy
- */
+
 @Data
 @ApiModel(description = "RefundInfo")
 @TableName("refund_info")
