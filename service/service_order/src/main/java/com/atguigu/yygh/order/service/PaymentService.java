@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import java.util.Map;
 
 public interface PaymentService extends IService<PaymentInfo> {
-	//向支付记录表中添加数据
+
 	void savePaymentInfo(OrderInfo order, Integer status);
 
 

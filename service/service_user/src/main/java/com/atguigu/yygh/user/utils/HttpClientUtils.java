@@ -88,7 +88,7 @@ public class HttpClientUtils {
                 HttpEntity entity = new StringEntity(body, ContentType.create(mimeType, charset));
                 post.setEntity(entity);
             }
-            // 设置参数
+            // set params
             RequestConfig.Builder customReqConf = RequestConfig.custom();
             if (connTimeout != null) {
                 customReqConf.setConnectTimeout(connTimeout);
